@@ -3,6 +3,6 @@ package RedVendedores.test;
 public class Test {
     public static void main(String[] args) {
 
-        System.out.println("miguel");
+        System.out.println("miguel <3");
     }
 }
