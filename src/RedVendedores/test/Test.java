@@ -1,5 +1,7 @@
 package RedVendedores.test;
 
+import junit.framework.TestCase;
+
 public class Test extends TestCase {
     public static void main(String[] args) {
 
