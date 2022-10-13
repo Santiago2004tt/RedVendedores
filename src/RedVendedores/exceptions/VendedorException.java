@@ -2,8 +2,7 @@ package RedVendedores.exceptions;
 
 public class VendedorException extends Exception{
 
-    public VendedorException(string mensaje){
+    public VendedorException(String mensaje){
         super(mensaje);
     }
-
 }
