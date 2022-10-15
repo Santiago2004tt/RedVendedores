@@ -2,9 +2,9 @@ package RedVendedores.model;
 
 public class Producto {
 
-    // Atributs
+    //Atributs
     //Builder
     //get and set
-    // to string
-    // hash
+    //to string
+    //hash
 }
