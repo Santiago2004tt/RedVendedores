@@ -1,5 +1,7 @@
 package RedVendedores.model;
 
+import RedVendedores.exceptions.VendedorException;
+
 import java.util.ArrayList;
 
 /**
@@ -92,4 +94,78 @@ public class RedVendedores {
     }
 
     //Crud's
+
+    // crud de vendedor
+
+    /**
+     * metodo para crear un vendedor
+     * @param nuevoVendedor
+     * @return
+     */
+    public String crearVendedor(Vendedor nuevoVendedor) {
+        String mensaje = "";
+
+        try {
+            verificarExistenciaVendedor(nuevoVendedor.getCedula()); // esta invocacion es para verificar si no se a creado
+            listaVendedores.add(nuevoVendedor);
+            mensaje = "el vendedor fue creado";
+        } catch (VendedorException e) {
+            mensaje  = e.getMessage();
+        }
+        return mensaje;
+    }
+
+    /**
+     * metodo para verificar si existe el vendedor o no
+     * @param cedula
+     * @throws VendedorException
+     */
+    private void verificarExistenciaVendedor(String cedula) throws VendedorException {
+        for (Vendedor vendedor : listaVendedores) {
+            if(vendedor.getCedula().equals(cedula)){
+                throw new VendedorException ("El vendedor ya existe");
+            }
+        }
+    }
+
+    /**
+     * metodo para verificar si existe el vendedor o no
+     * @param cedula
+     * @throws VendedorException
+     */
+    public void verificarNoExitenciaVendedor(String cedula) throws VendedorException{
+
+        for (Vendedor vendedor: listaVendedores) {
+            if(vendedor.getCedula().equals(cedula)){
+                if(vendedor == null){
+                    throw new VendedorException("El vendedor no existe");
+                }
+            }
+        }
+
+    }
+
+    /**
+     * metodo para buscar un vendedor
+     * @param cedula
+     * @return
+     */
+    public Vendedor buscarVendedor(String cedula) {
+        Vendedor vendedorEncontrado = null;
+
+        try {
+            verificarNoExitenciaVendedor(cedula);  //esta invocacion verifica si el vendedor existe o no
+            for (Vendedor vendedor : listaVendedores) {
+                if(vendedor.getCedula().equals(cedula)){
+                    vendedorEncontrado =  vendedor;
+                    break; //detiene el funcionamiento
+                }
+            }
+        }catch (VendedorException e) {
+            String mensaje  = e.getMessage();
+        }
+        return vendedorEncontrado;
+    }
+
+
 }
