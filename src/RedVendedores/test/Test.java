@@ -12,13 +12,15 @@ public class Test extends TestCase {
     static RedVendedores redVendedores = new RedVendedores("prueba");
 
     public static void main(String[] args) {
-
+        Vendedor vendedor3 = new Vendedor("jere", "Gamer", "11", "casa",null);
+        String mensajeResultado = redVendedores.crearVendedor(vendedor3);
+        System.out.println(mensajeResultado);
         //System.out.println("miguel <3");
     }
 
     public static void testCrearVendedor(){
-        Vendedor vendedor = new Vendedor("jere", "Gamer", "11", "casa",null);
-        String mensajeResultado = redVendedores.crearVendedor(vendedor);
+        Vendedor vendedor3 = new Vendedor("jere", "Gamer", "11", "casa",null);
+        String mensajeResultado = redVendedores.crearVendedor(vendedor3);
         assertEquals("el vendedor fue creado",mensajeResultado );
     }
 

@@ -121,6 +121,7 @@ public class RedVendedores {
      * @throws VendedorException
      */
     private void verificarExistenciaVendedor(String cedula) throws VendedorException {
+
         for (Vendedor vendedor : listaVendedores) {
             if(vendedor.getCedula().equals(cedula)){
                 throw new VendedorException ("El vendedor ya existe");
