@@ -3,25 +3,25 @@ package RedVendedores.model;
 
 public class Cafe extends Producto {
     //Atributs
-    private String Libras;
+    private String libras;
     //Builder
     public Cafe(String categoria, String codigo, String nombre, double precio, String libras) {
         super(categoria, codigo, nombre, precio);
-        this.Libras = libras;
+        this.libras = libras;
     }
     // Gets and sets
     public String getLibras() {
-        return Libras;
+        return libras;
     }
 
     public void setLibras(String libras) {
-        Libras = libras;
+        libras = libras;
     }
     //To string
     @java.lang.Override
     public java.lang.String toString() {
         return "Cafe{" +
-                "Libras='" + Libras + '\'' +
+                "Libras='" + libras + '\'' +
                 '}';
     }
 }

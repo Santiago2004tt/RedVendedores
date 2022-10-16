@@ -121,7 +121,6 @@ public class RedVendedores {
      * @throws VendedorException
      */
     private void verificarExistenciaVendedor(String cedula) throws VendedorException {
-
         for (Vendedor vendedor : listaVendedores) {
             if(vendedor.getCedula().equals(cedula)){
                 throw new VendedorException ("El vendedor ya existe");
@@ -134,16 +133,16 @@ public class RedVendedores {
      * @param cedula
      * @throws VendedorException
      */
-    public void verificarNoExitenciaVendedor(String cedula) throws VendedorException{
-
-        for (Vendedor vendedor: listaVendedores) {
-            if(vendedor.getCedula().equals(cedula)){
-                if(vendedor == null){
-                    throw new VendedorException("El vendedor no existe");
-                }
+    public void verificarNoExistenciaVendedor(String cedula) throws VendedorException{
+        Vendedor vendedor = null;
+        for (Vendedor vendedor1: listaVendedores) {
+            if(vendedor1.getCedula().equals(cedula)){
+                vendedor = vendedor1;
             }
         }
-
+        if(vendedor == null){
+            throw new VendedorException ("El vendedor no existe");
+        }
     }
 
     /**
@@ -155,7 +154,7 @@ public class RedVendedores {
         Vendedor vendedorEncontrado = null;
 
         try {
-            verificarNoExitenciaVendedor(cedula);  //esta invocacion verifica si el vendedor existe o no
+            verificarNoExistenciaVendedor(cedula);  //esta invocacion verifica si el vendedor existe o no
             for (Vendedor vendedor : listaVendedores) {
                 if(vendedor.getCedula().equals(cedula)){
                     vendedorEncontrado =  vendedor;
@@ -166,6 +165,24 @@ public class RedVendedores {
             String mensaje  = e.getMessage();
         }
         return vendedorEncontrado;
+    }
+
+    public String eliminarVendedor(String cedula){
+        String mensaje = "";
+
+        try {
+            verificarNoExistenciaVendedor(cedula);
+            for (int i = 0; i < listaVendedores.size(); i++) {
+                if(listaVendedores.get(i).getCedula().equals(cedula)) {
+                    listaVendedores.remove(i);
+                    mensaje = "El vendedor fue eliminado";
+                    break;
+                }
+            }
+        }catch (VendedorException e){
+            mensaje = e.getMessage();
+        }
+        return mensaje;
     }
 
 
