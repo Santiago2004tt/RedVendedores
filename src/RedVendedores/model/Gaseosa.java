@@ -3,12 +3,12 @@ package RedVendedores.model;
 
 public class Gaseosa extends Producto {
     private String litros;
-    private Strinf sabor;
+    private String sabor;
 
     public Gaseosa(String categoria, String codigo, String nombre, double precio, String litros, String sabor) {
         super(categoria, codigo, nombre, precio);
         this.litros = litros;
-        this.Sabor  = sabor;
+        this.sabor  = sabor;
     }
 
     public String getLitros() {

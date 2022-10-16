@@ -12,7 +12,7 @@ public abstract class Producto {
         this.categoria = categoria;
         this.codigo = codigo;
         this.nombre = nombre;
-        this.presio = precio;
+        this.precio = precio;
     }
     //get and set
 

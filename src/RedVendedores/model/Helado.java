@@ -8,11 +8,20 @@ public class Helado extends Producto {
     private String tamanio;
     private String sabor;
     //Builder
-    public Gaseosa(String categoria, String codigo, String nombre, double precio, String sabor, String tamanio) {
-        super(categoria, codigo, nombre, precio);
-        this.sabor = sabor;
-        this.tamanio = tamanio;
 
+    /**
+     *
+     * @param categoria
+     * @param codigo
+     * @param nombre
+     * @param precio
+     * @param tamanio
+     * @param sabor
+     */
+    public Helado(String categoria, String codigo, String nombre, double precio, String tamanio, String sabor) {
+        super(categoria, codigo, nombre, precio);
+        this.tamanio = tamanio;
+        this.sabor = sabor;
     }
 
     public Helado(String categoria, String codigo, String nombre, double precio) {
