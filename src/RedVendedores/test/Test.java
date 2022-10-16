@@ -7,11 +7,13 @@
  */
 
 package RedVendedores.test;
-import RedVendedores.exceptions.VendedorException;
+
 import RedVendedores.model.RedVendedores;
 import RedVendedores.model.Vendedor;
 import junit.framework.TestCase;
+
 public class Test extends TestCase {
+
 
     /**
      * prueba de crear el vendedor
@@ -59,3 +61,4 @@ public class Test extends TestCase {
         assertEquals("El vendedor fue eliminado", mensajeObtenido);
     }
 }
+
