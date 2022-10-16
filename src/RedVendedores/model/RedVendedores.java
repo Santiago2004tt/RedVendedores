@@ -156,7 +156,7 @@ public class RedVendedores {
         try {
             verificarNoExistenciaVendedor(cedula);  //esta invocacion verifica si el vendedor existe o no
             for (Vendedor vendedor : listaVendedores) {
-                if(vendedor.getCedula().equals(cedula)){
+                if(vendedor.getCedula().equals(cedula) && vendedor instanceof   Vendedor){
                     vendedorEncontrado =  vendedor;
                     break; //detiene el funcionamiento
                 }
