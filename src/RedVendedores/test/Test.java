@@ -9,11 +9,7 @@ import junit.framework.TestCase;
  */
 public class Test extends TestCase {
 
-
-
     public static void main(String[] args) {
-
-
     }
 
     public static void testCrearVendedor(){
@@ -22,7 +18,6 @@ public class Test extends TestCase {
         String mensajeResultado = redVendedores.crearVendedor(vendedor);
         assertEquals("el vendedor fue creado",mensajeResultado );
     }
-
 
     public static void testCrearVendedorRepetido(){
         RedVendedores redVendedores = new RedVendedores("prueba");
@@ -48,9 +43,4 @@ public class Test extends TestCase {
         String mensajeObtenido = redVendedores.eliminarVendedor("11");
         assertEquals("El vendedor fue eliminado", mensajeObtenido);
     }
-
-
-
-
-
 }

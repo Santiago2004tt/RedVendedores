@@ -1,9 +1,9 @@
 package RedVendedores.model;
 
 import RedVendedores.exceptions.VendedorException;
+import RedVendedores.exceptions.HeladoException;
 
 import java.util.ArrayList;
-
 /**
  * @Huendy Caicedo
  * @Santiago Sepulveda
@@ -33,7 +33,6 @@ public class RedVendedores {
     }
 
     //get and set
-
     /**
      * el metodo get de nombre
      * @return
@@ -116,7 +115,7 @@ public class RedVendedores {
     }
 
     /**
-     * metodo para verificar si existe el vendedor o no
+     * metodo para verificar si existe el vendedor
      * @param cedula
      * @throws VendedorException
      */
@@ -129,7 +128,7 @@ public class RedVendedores {
     }
 
     /**
-     * metodo para verificar si existe el vendedor o no
+     * metodo para verificar si el vendedor no existe
      * @param cedula
      * @throws VendedorException
      */
@@ -185,5 +184,83 @@ public class RedVendedores {
         return mensaje;
     }
 
+    // CRUD HELADO
 
+    //crear helado
+    public String crearHelado(Helado nuevoHelado){
+        String mensaje = "";
+
+        try{
+            verificarExistenciaHelado(nuevoHelado.getCodigo());
+            listaProductos.add(nuevoHelado);
+            mensaje = "el helado fue creado";
+        }catch (HeladoException e){
+            mensaje = e.getMessage();
+        }
+        return mensaje;
+    }
+
+    private void verificarExistenciaHelado(String codigo) throws HeladoException{
+        for (Producto producto : listaProductos) {
+            if (producto instanceof Helado) {
+                if (producto.getCodigo().equals(codigo))
+                    throw new HeladoException("El vendedor ya existe");
+            }
+        }
+    }
+
+    public void verificarNoExistenciaHelado(String codigo) throws HeladoException{
+        Producto producto = null;
+        for (Producto producto1: listaProductos) {
+            if(producto1 instanceof Helado) {
+                if (producto1.getCodigo().equals(codigo)) {
+                    producto = producto1;
+                    break;
+                }
+            }
+        }
+        if(producto == null){
+            throw new HeladoException("El helado no existe");
+        }
+    }
+
+    public Producto buscarHelado(String codigo) {
+        Producto productoEncontrado = null;
+
+        try {
+            //esta invocacion verifica si el helado existe o no
+            verificarNoExistenciaHelado(codigo);
+            for (Producto producto : listaProductos) {
+                if (producto instanceof Helado){
+                    if(producto.getCodigo().equals(codigo)){
+                        productoEncontrado = (Helado) producto;
+                        break; //detiene el funcionamiento
+                    }
+                }
+            }
+        }catch (HeladoException e) {
+            throw new RuntimeException(e);
+        }
+        return productoEncontrado;
+    }
+
+    public String eliminarHelado(String codigo){
+        String mensaje = "";
+
+        try {
+            verificarNoExistenciaHelado(codigo);
+            for (int i = 0; i < listaProductos.size(); i++) {
+                if (listaProductos.get(i) instanceof Helado){
+                    if(listaProductos.get(i).getCodigo().equals(codigo)) {
+                        listaProductos.remove(i);
+                        mensaje = "El helado fue eliminado";
+                        break;
+                    }
+                }
+            }
+        }catch (HeladoException e){
+            mensaje = e.getMessage();
+        }
+        return mensaje;
+    }
 }

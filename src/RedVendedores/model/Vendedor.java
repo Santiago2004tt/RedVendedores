@@ -24,7 +24,6 @@ public class Vendedor {
     }
 
     //Get and Set
-
     /**
      * metodo get de nombre
      * @return
