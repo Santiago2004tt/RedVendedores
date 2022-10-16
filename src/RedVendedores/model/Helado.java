@@ -14,22 +14,46 @@ public class Helado extends Producto{
     private String sabor;
 
     //Builder
+
+    /**
+     * metodo constructor
+     * @param categoria
+     * @param codigo
+     * @param nombre
+     * @param precio
+     */
     public Helado(String categoria, String codigo, String nombre, double precio) {
         super(categoria, codigo, nombre, precio);
     }
 
+    /**
+     * get de tamanio
+     * @return
+     */
     public String getTamanio() {
         return tamanio;
     }
 
+    /**
+     * set de tamanio
+     * @param tamanio
+     */
     public void setTamanio(String tamanio) {
         this.tamanio = tamanio;
     }
 
+    /**
+     * get de sabor
+     * @return
+     */
     public String getSabor() {
         return sabor;
     }
 
+    /**
+     * set de sabor
+     * @param sabor
+     */
     public void setSabor(String sabor) {
         this.sabor = sabor;
     }

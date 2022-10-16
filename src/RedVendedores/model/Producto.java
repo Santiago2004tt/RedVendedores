@@ -36,26 +36,50 @@ public abstract class Producto {
         this.codigo = codigo;
     }
 
+    /**
+     * get de nombre
+     * @return
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     * set de nombre
+     * @param nombre
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     * get de categoria
+     * @return
+     */
     public String getCategoria() {
         return categoria;
     }
 
+    /**
+     * set de categoria
+     * @param categoria
+     */
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
 
+    /**
+     * get de precio
+     * @return
+     */
     public double getPrecio() {
         return precio;
     }
 
+    /**
+     * set de precio
+     * @param precio
+     */
     public void setPrecio(double precio) {
         this.precio = precio;
     }

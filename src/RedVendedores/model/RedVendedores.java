@@ -162,11 +162,16 @@ public class RedVendedores {
                 }
             }
         }catch (VendedorException e) {
-            String mensaje  = e.getMessage();
+            throw new RuntimeException(e);//manda una exepcion para no retornar un objeto vacio
         }
         return vendedorEncontrado;
     }
 
+    /**
+     * metodo para eliminar un vendedor
+     * @param cedula
+     * @return
+     */
     public String eliminarVendedor(String cedula){
         String mensaje = "";
 
@@ -185,6 +190,31 @@ public class RedVendedores {
         return mensaje;
     }
 
+    /**
+     *metodo para actualizar un vendedor
+     * @param nombre
+     * @param apellido
+     * @param direccion
+     * @param cedula
+     * @return
+     */
+    public String actualizarVendedor(String nombre, String apellido, String direccion, String cedula){
+        String mensaje = "";
 
-
+        try {
+            verificarNoExistenciaVendedor(cedula);
+            for (int i = 0; i < listaVendedores.size(); i++) {
+                if(listaVendedores.get(i).getCedula().equals(cedula)) {
+                    listaVendedores.get(i).setNombre(nombre);
+                    listaVendedores.get(i).setApellido(apellido);
+                    listaVendedores.get(i).setDireccion(direccion);
+                    mensaje = "El vendedor fue actualizado";
+                    break;
+                }
+            }
+        }catch (VendedorException e){
+            mensaje = e.getMessage();
+        }
+        return mensaje;
+    }
 }
