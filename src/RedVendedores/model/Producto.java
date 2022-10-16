@@ -1,4 +1,7 @@
 package RedVendedores.model;
+
+import java.util.Objects;
+
 public abstract class Producto {
 
     //Atributs
@@ -6,20 +9,29 @@ public abstract class Producto {
     private String codigo;
     private String categoria;
     private double precio;
-    //Builder
 
+    //Builder
     public Producto(String categoria, String codigo, String nombre, double precio) {
         this.categoria = categoria;
         this.codigo = codigo;
         this.nombre = nombre;
-        this.presio = precio;
+        this.precio = precio;
     }
+
     //get and set
 
+    /**
+     * get de codigo
+     * @return
+     */
     public String getCodigo() {
         return codigo;
     }
 
+    /**
+     * set de codigo
+     * @param codigo
+     */
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
@@ -47,8 +59,8 @@ public abstract class Producto {
     public void setPrecio(double precio) {
         this.precio = precio;
     }
-    //to string
 
+    //to string
     @java.lang.Override
     public java.lang.String toString() {
         return "Producto{" +
@@ -61,15 +73,17 @@ public abstract class Producto {
 
     //hash
 
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        if (!super.equals(object)) return false;
-        Producto producto = (Producto) object;
-        return java.lang.Double.compare(producto.precio, precio) == 0 && java.util.Objects.equals(nombre, producto.nombre) && java.util.Objects.equals(codigo, producto.codigo) && java.util.Objects.equals(categoria, producto.categoria);
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Producto producto = (Producto) o;
+        return Objects.equals(getCodigo(), producto.getCodigo());
     }
 
+    @Override
     public int hashCode() {
-        return java.util.Objects.hash(super.hashCode(), nombre, codigo, categoria, precio);
+        return Objects.hash(getCodigo());
     }
 }
