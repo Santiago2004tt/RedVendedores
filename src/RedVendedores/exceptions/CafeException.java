@@ -6,7 +6,7 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
 
-package RedVendedores.model;
+package RedVendedores.exceptions;
 
 public class CafeException extends Exception{
 

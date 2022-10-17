@@ -1,5 +1,6 @@
 package RedVendedores.model;
 
+import RedVendedores.exceptions.CafeException;
 import RedVendedores.exceptions.GaseosaException;
 import RedVendedores.exceptions.HeladoException;
 import RedVendedores.exceptions.VendedorException;
@@ -16,7 +17,6 @@ public class RedVendedores {
 
     /**
      * constructor de red vendedores
-     *
      * @param nombre
      */
     public RedVendedores(String nombre) {
@@ -94,7 +94,7 @@ public class RedVendedores {
 
     //Crud's
 
-    // crud de vendedor
+    //---------------------------------------CRUD_VENDEDOR------------------------------------------------//
 
     /**
      * metodo para crear un vendedor
@@ -131,7 +131,6 @@ public class RedVendedores {
 
     /**
      * metodo para verificar si el vendedor no existe
-     *
      * @param cedula
      * @throws VendedorException
      */
@@ -327,6 +326,16 @@ public class RedVendedores {
         return mensaje;
     }
 
+    /**
+     * uptade ice cream
+     * @param categoria
+     * @param codigo
+     * @param nombre
+     * @param precio
+     * @param sabor
+     * @param tamanio
+     * @return
+     */
     public String actualizarHelado(String categoria, String codigo, String nombre, double precio, String sabor, String tamanio) {
         String mensaje = "";
 
@@ -353,6 +362,11 @@ public class RedVendedores {
 
     //---------------------------------------CRUD_GASEOSA------------------------------------------------//
 
+    /**
+     * metodo para crear una gaseosa
+     * @param nuevaGaseosa
+     * @return
+     */
     public String crearGaseosa(Gaseosa nuevaGaseosa){
         String mensaje = "";
 
@@ -366,6 +380,11 @@ public class RedVendedores {
         return mensaje;
     }
 
+    /**
+     * metodo para verificar si existe la gaseosa
+     * @param codigo
+     * @throws GaseosaException
+     */
     private void verificarExistenciaGaseosa(String codigo) throws GaseosaException {
         for (Producto producto : listaProductos) {
             if (producto instanceof Gaseosa) {
@@ -375,6 +394,11 @@ public class RedVendedores {
         }
     }
 
+    /**
+     * metodo para verificar que no existe la gaseosa
+     * @param codigo
+     * @throws GaseosaException
+     */
     public void verificarNoExistenciaGaseosa(String codigo) throws GaseosaException{
         Producto producto = null;
         for (Producto producto1 : listaProductos) {
@@ -390,6 +414,11 @@ public class RedVendedores {
         }
     }
 
+    /**
+     * metodo para buscar una gaseosa
+     * @param codigo
+     * @return
+     */
     public Producto buscarGaseosa(String codigo){
         Producto productoEncontrado = null;
 
@@ -410,6 +439,11 @@ public class RedVendedores {
         return productoEncontrado;
     }
 
+    /**
+     * metodo para eliminar una gaseosa
+     * @param codigo
+     * @return
+     */
     public String eliminarGaseosa(String codigo){
         String mensaje = "";
 
@@ -430,6 +464,16 @@ public class RedVendedores {
         return mensaje;
     }
 
+    /**
+     * metodo para actualizar una gaseosa
+     * @param categoria
+     * @param codigo
+     * @param nombre
+     * @param precio
+     * @param litros
+     * @param sabor
+     * @return
+     */
     public String actualizarGaseosa(String categoria, String codigo, String nombre, double precio, String litros, String sabor) {
         String mensaje = "";
 
@@ -456,6 +500,11 @@ public class RedVendedores {
 
     //---------------------------------------CRUD_CAFE----------------------------------------------------//
 
+    /**
+     * metodo para crear un nuevo cafe
+     * @param nuevoCafe
+     * @return
+     */
     public String crearCafe(Cafe nuevoCafe){
         String mensaje = "";
 
@@ -469,6 +518,11 @@ public class RedVendedores {
         return mensaje;
     }
 
+    /**
+     * metodo para verificar si el cafe existe
+     * @param codigo
+     * @throws CafeException
+     */
     private void verificarExistenciaCafe(String codigo) throws CafeException {
         for (Producto producto : listaProductos) {
             if (producto instanceof Cafe) {
@@ -478,6 +532,11 @@ public class RedVendedores {
         }
     }
 
+    /**
+     * metodo para verificar que no existe el cafe
+     * @param codigo
+     * @throws CafeException
+     */
     public void verificarNoExistenciaCafe(String codigo) throws CafeException{
         Producto producto = null;
         for (Producto producto1 : listaProductos) {
@@ -493,6 +552,11 @@ public class RedVendedores {
         }
     }
 
+    /**
+     *metodo para buscar un cafe
+     * @param codigo
+     * @return
+     */
     public Producto buscarCafe(String codigo){
         Producto productoEncontrado = null;
 
@@ -513,6 +577,11 @@ public class RedVendedores {
         return productoEncontrado;
     }
 
+    /**
+     * metodo para eliminar un cafe
+     * @param codigo
+     * @return
+     */
     public String eliminarCafe(String codigo){
         String mensaje = "";
 
@@ -533,6 +602,15 @@ public class RedVendedores {
         return mensaje;
     }
 
+    /**
+     * metodo para actualizar cafe
+     * @param categoria
+     * @param codigo
+     * @param nombre
+     * @param precio
+     * @param libras
+     * @return
+     */
     public String actualizarCafe(String categoria, String codigo, String nombre, double precio, String libras) {
         String mensaje = "";
 
