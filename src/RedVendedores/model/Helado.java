@@ -22,8 +22,10 @@ public class Helado extends Producto{
      * @param nombre
      * @param precio
      */
-    public Helado(String categoria, String codigo, String nombre, double precio) {
+    public Helado(String categoria, String codigo, String nombre, double precio, String sabor, String tamanio) {
         super(categoria, codigo, nombre, precio);
+        this.sabor = sabor;
+        this.tamanio = tamanio;
     }
 
     /**

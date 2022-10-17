@@ -1,13 +1,6 @@
-/*
- * Copyright (c) 2022. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
- * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
- * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
- * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
- * Vestibulum commodo. Ut rhoncus gravida arcu.
- */
-
 package RedVendedores.model;
 
+import RedVendedores.exceptions.GaseosaException;
 import RedVendedores.exceptions.HeladoException;
 import RedVendedores.exceptions.VendedorException;
 
@@ -230,9 +223,13 @@ public class RedVendedores {
         return mensaje;
     }
 
-    // CRUD HELADO
+    //------------------------------------CRUD_HELADO-----------------------------------------------//
 
-    //crear helado
+    /**
+     * Create an ice cream
+     * @param nuevoHelado
+     * @return
+     */
     public String crearHelado(Helado nuevoHelado) {
         String mensaje = "";
 
@@ -246,15 +243,25 @@ public class RedVendedores {
         return mensaje;
     }
 
+    /**
+     * Verify existence ice cream
+     * @param codigo
+     * @throws HeladoException
+     */
     private void verificarExistenciaHelado(String codigo) throws HeladoException {
         for (Producto producto : listaProductos) {
             if (producto instanceof Helado) {
                 if (producto.getCodigo().equals(codigo))
-                    throw new HeladoException("El vendedor ya existe");
+                    throw new HeladoException("El helado ya existe");
             }
         }
     }
 
+    /***
+     *  Check if it not exists an ice cream
+     * @param codigo
+     * @throws HeladoException
+     */
     public void verificarNoExistenciaHelado(String codigo) throws HeladoException {
         Producto producto = null;
         for (Producto producto1 : listaProductos) {
@@ -270,6 +277,11 @@ public class RedVendedores {
         }
     }
 
+    /**
+     * Search ice cream
+     * @param codigo
+     * @return
+     */
     public Producto buscarHelado(String codigo) {
         Producto productoEncontrado = null;
 
@@ -290,6 +302,11 @@ public class RedVendedores {
         return productoEncontrado;
     }
 
+    /**
+     * Delete ice cream
+     * @param codigo
+     * @return
+     */
     public String eliminarHelado(String codigo) {
         String mensaje = "";
 
@@ -309,4 +326,234 @@ public class RedVendedores {
         }
         return mensaje;
     }
+
+    public String actualizarHelado(String categoria, String codigo, String nombre, double precio, String sabor, String tamanio) {
+        String mensaje = "";
+
+        try {
+            verificarNoExistenciaHelado(codigo);
+            for (int i = 0; i < listaProductos.size(); i++) {
+                if (listaProductos.get(i) instanceof Helado) {
+                    if (listaProductos.get(i).getCodigo().equals(codigo)) {
+                        ((Helado)listaProductos.get(i)).setNombre(nombre);
+                        ((Helado)listaProductos.get(i)).setCategoria(categoria);
+                        ((Helado)listaProductos.get(i)).setPrecio(precio);
+                        ((Helado)listaProductos.get(i)).setSabor(sabor);
+                        ((Helado)listaProductos.get(i)).setTamanio(tamanio);
+                        mensaje = "El vendedor fue actualizado";
+                        break;
+                    }
+                }
+            }
+        } catch (HeladoException e) {
+            mensaje = e.getMessage();
+        }
+        return mensaje;
+    }
+
+    //---------------------------------------CRUD_GASEOSA------------------------------------------------//
+
+    public String crearGaseosa(Gaseosa nuevaGaseosa){
+        String mensaje = "";
+
+        try {
+            verificarExistenciaGaseosa(nuevaGaseosa.getCodigo());
+            listaProductos.add(nuevaGaseosa);
+            mensaje = "el gaseosa fue creada";
+        } catch (GaseosaException e) {
+            mensaje = e.getMessage();
+        }
+        return mensaje;
+    }
+
+    private void verificarExistenciaGaseosa(String codigo) throws GaseosaException {
+        for (Producto producto : listaProductos) {
+            if (producto instanceof Gaseosa) {
+                if (producto.getCodigo().equals(codigo))
+                    throw new GaseosaException("La gaseosa ya existe");
+            }
+        }
+    }
+
+    public void verificarNoExistenciaGaseosa(String codigo) throws GaseosaException{
+        Producto producto = null;
+        for (Producto producto1 : listaProductos) {
+            if (producto1 instanceof Gaseosa) {
+                if (producto1.getCodigo().equals(codigo)) {
+                    producto = producto1;
+                    break;
+                }
+            }
+        }
+        if (producto == null) {
+            throw new GaseosaException("La gaseosa no existe");
+        }
+    }
+
+    public Producto buscarGaseosa(String codigo){
+        Producto productoEncontrado = null;
+
+        try {
+            //esta invocacion verifica si el helado existe o no
+            verificarNoExistenciaGaseosa(codigo);
+            for (Producto producto : listaProductos) {
+                if (producto instanceof Gaseosa) {
+                    if (producto.getCodigo().equals(codigo)) {
+                        productoEncontrado = (Gaseosa) producto;
+                        break; //detiene el funcionamiento
+                    }
+                }
+            }
+        } catch (GaseosaException e) {
+            throw new RuntimeException(e);
+        }
+        return productoEncontrado;
+    }
+
+    public String eliminarGaseosa(String codigo){
+        String mensaje = "";
+
+        try {
+            verificarNoExistenciaGaseosa(codigo);
+            for (int i = 0; i < listaProductos.size(); i++) {
+                if (listaProductos.get(i) instanceof Gaseosa) {
+                    if (listaProductos.get(i).getCodigo().equals(codigo)) {
+                        listaProductos.remove(i);
+                        mensaje = "La gaseosa fue eliminada";
+                        break;
+                    }
+                }
+            }
+        } catch (GaseosaException e) {
+            mensaje = e.getMessage();
+        }
+        return mensaje;
+    }
+
+    public String actualizarGaseosa(String categoria, String codigo, String nombre, double precio, String litros, String sabor) {
+        String mensaje = "";
+
+        try {
+            verificarNoExistenciaGaseosa(codigo);
+            for (int i = 0; i < listaProductos.size(); i++) {
+                if (listaProductos.get(i) instanceof Gaseosa) {
+                    if (listaProductos.get(i).getCodigo().equals(codigo)) {
+                        ((Gaseosa)listaProductos.get(i)).setNombre(nombre);
+                        ((Gaseosa)listaProductos.get(i)).setCategoria(categoria);
+                        ((Gaseosa)listaProductos.get(i)).setPrecio(precio);
+                        ((Gaseosa)listaProductos.get(i)).setSabor(sabor);
+                        ((Gaseosa)listaProductos.get(i)).setLitros(litros);
+                        mensaje = "El vendedor fue actualizado";
+                        break;
+                    }
+                }
+            }
+        } catch (GaseosaException e) {
+            mensaje = e.getMessage();
+        }
+        return mensaje;
+    }
+
+    //---------------------------------------CRUD_CAFE----------------------------------------------------//
+
+    public String crearCafe(Cafe nuevoCafe){
+        String mensaje = "";
+
+        try {
+            verificarExistenciaCafe(nuevoCafe.getCodigo());
+            listaProductos.add(nuevoCafe);
+            mensaje = "el cafe fue creado";
+        } catch (CafeException e) {
+            mensaje = e.getMessage();
+        }
+        return mensaje;
+    }
+
+    private void verificarExistenciaCafe(String codigo) throws CafeException {
+        for (Producto producto : listaProductos) {
+            if (producto instanceof Cafe) {
+                if (producto.getCodigo().equals(codigo))
+                    throw new CafeException("El cafe ya existe");
+            }
+        }
+    }
+
+    public void verificarNoExistenciaCafe(String codigo) throws CafeException{
+        Producto producto = null;
+        for (Producto producto1 : listaProductos) {
+            if (producto1 instanceof Cafe) {
+                if (producto1.getCodigo().equals(codigo)) {
+                    producto = producto1;
+                    break;
+                }
+            }
+        }
+        if (producto == null) {
+            throw new CafeException("El cafe no existe");
+        }
+    }
+
+    public Producto buscarCafe(String codigo){
+        Producto productoEncontrado = null;
+
+        try {
+            //esta invocacion verifica si el helado existe o no
+            verificarNoExistenciaCafe(codigo);
+            for (Producto producto : listaProductos) {
+                if (producto instanceof Cafe) {
+                    if (producto.getCodigo().equals(codigo)) {
+                        productoEncontrado = (Cafe) producto;
+                        break; //detiene el funcionamiento
+                    }
+                }
+            }
+        } catch (CafeException e) {
+            throw new RuntimeException(e);
+        }
+        return productoEncontrado;
+    }
+
+    public String eliminarCafe(String codigo){
+        String mensaje = "";
+
+        try {
+            verificarNoExistenciaCafe(codigo);
+            for (int i = 0; i < listaProductos.size(); i++) {
+                if (listaProductos.get(i) instanceof Cafe) {
+                    if (listaProductos.get(i).getCodigo().equals(codigo)) {
+                        listaProductos.remove(i);
+                        mensaje = "El cafe fue eliminada";
+                        break;
+                    }
+                }
+            }
+        } catch (CafeException e) {
+            mensaje = e.getMessage();
+        }
+        return mensaje;
+    }
+
+    public String actualizarCafe(String categoria, String codigo, String nombre, double precio, String libras) {
+        String mensaje = "";
+
+        try {
+            verificarNoExistenciaCafe(codigo);
+            for (int i = 0; i < listaProductos.size(); i++) {
+                if (listaProductos.get(i) instanceof Cafe) {
+                    if (listaProductos.get(i).getCodigo().equals(codigo)) {
+                        ((Cafe)listaProductos.get(i)).setNombre(nombre);
+                        ((Cafe)listaProductos.get(i)).setCategoria(categoria);
+                        ((Cafe)listaProductos.get(i)).setPrecio(precio);
+                        ((Cafe)listaProductos.get(i)).setLibras(libras);
+                        mensaje = "El vendedor fue actualizado";
+                        break;
+                    }
+                }
+            }
+        } catch (CafeException e) {
+            mensaje = e.getMessage();
+        }
+        return mensaje;
+    }
+
 }
