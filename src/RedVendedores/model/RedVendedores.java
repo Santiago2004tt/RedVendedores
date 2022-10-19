@@ -102,15 +102,15 @@ public class RedVendedores {
      * @param nuevoVendedor
      * @return
      */
-    public String crearVendedor(Vendedor nuevoVendedor) {
+    public String crearVendedor(Vendedor nuevoVendedor) throws VendedorException {
         String mensaje = "";
 
         try {
-            verificarExistenciaVendedor(nuevoVendedor.getCedula()); // esta invocacion es para verificar si no se a creado
+            verificarRepetido(nuevoVendedor.getCedula()); // esta invocacion es para verificar si no se a creado
             listaVendedores.add(nuevoVendedor);
             mensaje = "el vendedor fue creado";
         } catch (VendedorException e) {
-            mensaje = e.getMessage();
+            throw new VendedorException("El vendedor no existe");
         }
         return mensaje;
     }
@@ -121,7 +121,7 @@ public class RedVendedores {
      * @param cedula
      * @throws VendedorException
      */
-    private void verificarExistenciaVendedor(String cedula) throws VendedorException {
+    private void verificarRepetido(String cedula) throws VendedorException {
         for (Vendedor vendedor : listaVendedores) {
             if (vendedor.getCedula().equals(cedula)) {
                 throw new VendedorException("El vendedor ya existe");
