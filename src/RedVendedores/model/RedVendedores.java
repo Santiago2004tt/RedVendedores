@@ -102,15 +102,16 @@ public class RedVendedores {
      * @param nuevoVendedor
      * @return
      */
-    public String crearVendedor(Vendedor nuevoVendedor) throws VendedorException {
+    public String crearVendedor(Vendedor nuevoVendedor) {
         String mensaje = "";
+        Vendedor vendedor;
 
         try {
             verificarRepetido(nuevoVendedor.getCedula()); // esta invocacion es para verificar si no se a creado
             listaVendedores.add(nuevoVendedor);
             mensaje = "el vendedor fue creado";
         } catch (VendedorException e) {
-            throw new VendedorException("El vendedor no existe");
+            mensaje = e.getMessage();
         }
         return mensaje;
     }
@@ -122,6 +123,7 @@ public class RedVendedores {
      * @throws VendedorException
      */
     private void verificarRepetido(String cedula) throws VendedorException {
+
         for (Vendedor vendedor : listaVendedores) {
             if (vendedor.getCedula().equals(cedula)) {
                 throw new VendedorException("El vendedor ya existe");
@@ -134,16 +136,20 @@ public class RedVendedores {
      * @param cedula
      * @throws VendedorException
      */
-    public void verificarNoExistenciaVendedor(String cedula) throws VendedorException {
+    private int verificarPosicionVendedor(String cedula) throws VendedorException {
         Vendedor vendedor = null;
-        for (Vendedor vendedor1 : listaVendedores) {
-            if (vendedor1.getCedula().equals(cedula)) {
-                vendedor = vendedor1;
+        int posicion = 0;
+
+        for (int i = 0; i < listaVendedores.size(); i++) {
+            vendedor= listaVendedores.get(i);
+            if (vendedor.getCedula().equals(cedula)) {
+                posicion = i;
             }
         }
         if (vendedor == null) {
             throw new VendedorException("El vendedor no existe");
         }
+        return posicion;
     }
 
     /**
@@ -156,13 +162,8 @@ public class RedVendedores {
         Vendedor vendedorEncontrado = null;
 
         try {
-            verificarNoExistenciaVendedor(cedula);  //esta invocacion verifica si el vendedor existe o no
-            for (Vendedor vendedor : listaVendedores) {
-                if (vendedor.getCedula().equals(cedula)) {
-                    vendedorEncontrado = vendedor;
-                    break; //detiene el funcionamiento
-                }
-            }
+            int posicion = verificarPosicionVendedor(cedula);  //esta invocacion verifica si el vendedor existe o no
+            vendedorEncontrado = listaVendedores.get(posicion);
         } catch (VendedorException e) {
             throw new RuntimeException(e);//manda una exepcion para no retornar un objeto vacio
         }
@@ -179,14 +180,9 @@ public class RedVendedores {
         String mensaje = "";
 
         try {
-            verificarNoExistenciaVendedor(cedula);
-            for (int i = 0; i < listaVendedores.size(); i++) {
-                if (listaVendedores.get(i).getCedula().equals(cedula)) {
-                    listaVendedores.remove(i);
-                    mensaje = "El vendedor fue eliminado";
-                    break;
-                }
-            }
+            int posicion = verificarPosicionVendedor(cedula);
+            listaVendedores.remove(posicion);
+            mensaje = "El vendedor fue eliminado";
         } catch (VendedorException e) {
             mensaje = e.getMessage();
         }
@@ -206,16 +202,11 @@ public class RedVendedores {
         String mensaje = "";
 
         try {
-            verificarNoExistenciaVendedor(cedula);
-            for (int i = 0; i < listaVendedores.size(); i++) {
-                if (listaVendedores.get(i).getCedula().equals(cedula)) {
-                    listaVendedores.get(i).setNombre(nombre);
-                    listaVendedores.get(i).setApellido(apellido);
-                    listaVendedores.get(i).setDireccion(direccion);
-                    mensaje = "El vendedor fue actualizado";
-                    break;
-                }
-            }
+            int posicion = verificarPosicionVendedor(cedula);
+            listaVendedores.get(posicion).setNombre(nombre);
+            listaVendedores.get(posicion).setApellido(apellido);
+            listaVendedores.get(posicion).setDireccion(direccion);
+            mensaje = "El vendedor fue actualizado";
         } catch (VendedorException e) {
             mensaje = e.getMessage();
         }
